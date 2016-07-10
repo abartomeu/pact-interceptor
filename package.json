@@ -1,0 +1,27 @@
+{
+  "name": "pact-interceptor",
+  "version": "0.0.1",
+  "description": "A request interceptor to be used in Pact tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tarciosaraiva/pact-interceptor.git"
+  },
+  "keywords": [
+    "pact",
+    "interceptor",
+    "mitm",
+    "consumer",
+    "driven",
+    "contracts"
+  ],
+  "author": "Tarcio Saraiva <tarcio@gmail.com> (http://twitter.com/tarciosaraiva)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tarciosaraiva/pact-interceptor/issues"
+  },
+  "homepage": "https://github.com/tarciosaraiva/pact-interceptor#readme"
+}
