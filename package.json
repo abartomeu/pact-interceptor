@@ -8,7 +8,8 @@
     "jscpd": "jscpd -p src -r json -o jscpd.json",
     "pretest": "npm run lint && npm run jscpd",
     "test": "mocha",
-    "changelog": "./node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "changelog": "./node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "preversion": "npm run changelog"
   },
   "engines": {
     "node": ">=4"
