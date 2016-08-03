@@ -1,6 +1,6 @@
 {
   "name": "pact-interceptor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A request interceptor to be used in Pact tests",
   "main": "lib/index.js",
   "scripts": {
