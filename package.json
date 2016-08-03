@@ -2,10 +2,16 @@
   "name": "pact-interceptor",
   "version": "0.0.1",
   "description": "A request interceptor to be used in Pact tests",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "standard",
-    "test": "mocha"
+    "jscpd": "jscpd -p src -r json -o jscpd.json",
+    "pretest": "npm run lint && npm run jscpd",
+    "test": "mocha",
+    "changelog": "./node_modules/.bin/conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "engines": {
+    "node": ">=4"
   },
   "repository": {
     "type": "git",
@@ -25,12 +31,27 @@
     "url": "https://github.com/pact-foundation/pact-interceptor/issues"
   },
   "homepage": "https://github.com/pact-foundation/pact-interceptor#readme",
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "test/**"
+    ]
+  },
   "dependencies": {
-    "mitm": "1.2.1"
+    "lodash.find": "4.x",
+    "lodash.isnil": "4.x",
+    "mitm": "1.x"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "mocha": "2.5.3",
-    "standard": "7.1.2"
+    "babel-eslint": "6.x",
+    "chai": "3.x",
+    "conventional-changelog-cli": "1.x",
+    "jscpd": "0.x",
+    "mocha": "3.x",
+    "nock": "8.x",
+    "sinon": "1.x",
+    "sinon-chai": "2.x",
+    "standard": "7.x",
+    "superagent": "2.x"
   }
 }

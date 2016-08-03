@@ -1,0 +1,8 @@
+# folders
+test/
+
+# files
+.codeclimate.yml
+.editorconfig
+.istanbul.yml
+.travis.yml
