@@ -6,3 +6,4 @@ test/
 .editorconfig
 .istanbul.yml
 .travis.yml
+jscpd.json
