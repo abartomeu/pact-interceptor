@@ -1,10 +1,10 @@
 'use strict'
 
-const URL = require('url')
-const Mitm = require('mitm')
-const http = require('http')
-const find = require('lodash.find')
-const isNil = require('lodash.isnil')
+var URL = require('url')
+var Mitm = require('mitm')
+var http = require('http')
+var find = require('lodash.find')
+var isNil = require('lodash.isnil')
 
 module.exports = class Interceptor {
 
@@ -21,13 +21,13 @@ module.exports = class Interceptor {
   }
 
   interceptRequestsOn (url) {
-    const blacklist = []
+    var blacklist = []
 
     if (isNil(url)) {
       console.log('!!!! INTERCEPTING ALL REQUESTS !!!!')
     } else {
       // logger.info(`Intercepting URL "${url}"`)
-      const parsedUrl = URL.parse(url)
+      var parsedUrl = URL.parse(url)
       if (parsedUrl.port === null) {
         parsedUrl.port = parsedUrl.protocol === 'http:' ? 80 : 443
       }
@@ -38,34 +38,35 @@ module.exports = class Interceptor {
     this.mitm.enable()
     this.disabled = false
 
-    const whitelist = this.whitelist
+    var whitelist = this.whitelist
     this.mitm.on('connect', function (socket, opts) {
-      const port = opts.port || null
+      var port = opts.port || null
 
       // logger.info(`Intercepting connection with hostname "${opts.host}", port "${port}"`)
 
-      const foundBypass = !!find(whitelist, { hostname: opts.host, port })
-      const shouldIntercept = !!find(blacklist, { hostname: opts.host, port })
+      var foundBypass = !!find(whitelist, { hostname: opts.host, port })
+      var shouldIntercept = !!find(blacklist, { hostname: opts.host, port })
       if (foundBypass || !shouldIntercept) {
         // logger.info(`Bypassing request to "${opts.host}"`)
         socket.bypass()
       }
     })
 
-    const proxyHost = this.proxyHost
+    var proxyHost = this.proxyHost
     this.mitm.on('request', (interceptedRequest, res) => {
-      // logger.info(`Request intercepted. Triggering call to Mock Server on "${proxyHost}${interceptedRequest.url}"`)
+      // console.log(`Request intercepted. Triggering call to Mock Server on "${proxyHost}${interceptedRequest.url}"`)
 
-      const opts = URL.parse(`${proxyHost}${interceptedRequest.url}`)
+      var opts = URL.parse(`${proxyHost}${interceptedRequest.url}`)
       opts.method = interceptedRequest.method.toLowerCase()
       opts.headers = interceptedRequest.headers || {}
 
-      const proxyRequest = http.request(opts, (interceptedResponse) => {
-        let interceptedResponseBody = ''
+      var proxyRequest = http.request(opts, (interceptedResponse) => {
+        var interceptedResponseBody = ''
         interceptedResponse.setEncoding('utf8')
         interceptedResponse.on('data', (data) => { interceptedResponseBody += data })
         interceptedResponse.on('end', () => {
-          // logger.info(`HTTP ${interceptedResponse.statusCode} on ${interceptedRequest.url}`)
+          // console.log(`HTTP ${interceptedResponse.statusCode} on ${interceptedRequest.url}`)
+          // console.log(interceptedResponseBody)
 
           if (interceptedResponse.statusCode > 400) {
             res.statusCode = interceptedResponse.statusCode
